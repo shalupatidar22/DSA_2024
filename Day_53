@@ -1,0 +1,45 @@
+# Problem statement : Minimum number of deletions and insertions
+//Given two strings str1 and str2. The task is to remove or insert the minimum number of characters from/in str1 so as to transform it into str2.
+//It could be possible that the same character needs to be removed/deleted from one point of str1 and inserted to some another point.
+
+
+class Solution{
+int findlcs(string &str1,string &str2)
+{
+    int m=str1.size();
+    int n=str2.size();
+   // make a 2d dp for storing the lcs of different length between the 2 strings
+   vector<vector<int>>dp(m+1,vector<int>(n+1,0));
+   for(int i=1;i<=m;i++)
+   {
+       for(int j=1;j<=n;j++)
+       {
+           // if found the same then update the dp length 
+           if(str1[i-1]==str2[j-1])
+           {
+               dp[i][j]=dp[i-1][j-1]+1;
+           }
+           else
+           {
+               //maximum of either of the strings 
+               dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+           }
+       }
+   }
+   // the last filling will tell the lcs of the 
+   return dp[m][n];
+   
+}
+ 
+public:
+int minOperations(string str1, string str2) 
+{ 
+    int lcslength=findlcs(str1,str2);
+    int insertion=str2.length()-lcslength;
+    int deletion=str1.length()-lcslength;
+    return insertion+deletion;
+    
+    // Your code goes here
+    
+} 
+};
