@@ -73,7 +73,7 @@ int main() {
     // Copy the list
     Node* copiedList = copyList(head);
 
-    Print copied list to verify (data and random pointers)
+    // Print copied list to verify (data and random pointers)
     Node* temp = copiedList;
     while (temp != NULL) {
         cout << "Node: " << temp->data;
